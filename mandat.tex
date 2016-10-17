@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{tcolorbox}
+\usepackage[margin=2cm]{geometry}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{eurosym}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{cancel}
+
+\title{Chariot-Robot (Version 1.0)} %trouver long trait d'union
+\author{Philippe Caron\\
+        Marc Demers}
+\date{\today}
+
+\renewcommand{\thesubsubsection}{\alph{subsubsection}.}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\newenvironment{pseudo}{\begin{tcolorbox}[left skip = 2cm, right skip = 2cm]\itshape}{\end{tcolorbox}}
+\newcommand{\key}[1]{{\bf #1}}
+\newcommand{\name}[1]{{\scshape #1}}
+\newcommand\tab[1][0.5cm]{\hspace*{#1}}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{pink},
+  keywordstyle=\color{purple},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{brown},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\begin{document}
+\maketitle
+\section{Mandat du projet}
+Le robot doit pouvoir prendre de manière autonome 4 bières (une à la fois) d'une glacière sur son espace de chargement. Une fois les bière chargée, il suit une circuit tracé au ruban adhésif et les décharge à l'autre bout.
+\subsection{Spécifications}
+Une bouteille de bière pleine pèse environ 500g, tandis qu'une vide pèse environ 150g.
+La glacière est blanche à l'intérieure et mesure environ 10" de haut.
+Le ruban adhésif est d'une couleur qui contraste avec le plancher.
+\section{Étapes du projet}
+\begin{enumerate}
+\item Design général et composantes
+\item Line-following Robot
+\item Grue
+\item Ajout de la caméra (traitement numérique du signal)
+\item Télécommande radio
+\end{enumerate}
+\section{Caractéristiques}
+Le robot n'utilisera que des moteurs électriques dont la vitesse sera réglée au besoin par \key{Pulse-Width Modulation}. Les roues avant ont un axe fixe et sont les roues motrices. Les roues arrières peuvent tournées mais ne propulsent pas. La grue devra récupérer les bières par le bouchon/goulot. Le robot sera muni de 3 photo-résistances afin de suivre la ligne. La source de courrant sera l'électricité municipale au début, puis éventuellement une batterie 12V avec minimum 9Ah (pour 3h d'utilisation continue). La batterie pourra être utilisée comme contrepoids de la grue.
+
+\begin{center}
+\begin{tabular}{l|l}
+  \multicolumn{2}{c}{Caractéristique techniques}
+   \\\hline \hline
+  Motricité    & Traction avant \\
+  Direction    & Arrière \\
+  Longeur      & 17" \\
+  Largeur      & 8$\frac{1}{2}$" \\
+  Capacité     & 4 bières \\
+  Alimentation & 12VDC \\
+  Consommation & 3A \\
+\end{tabular}
+\end{center}
+
+\section{Design général et composante}
+\begin{itemize}
+\item 4 roues de 6.6cm de diamètre
+\item 4 moteurs
+  \begin{itemize}
+  \item 1 $\times$ 100RPM, propulsion
+  \item 3 $\times$ 60RPM, direction, hissage et giration
+  \end{itemize}
+\item 1 panneau de 8 relais
+\item 1 step-down converter 12V-5V
+\end{itemize}
+\end{document}
